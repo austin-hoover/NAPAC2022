@@ -84,28 +84,30 @@ No simulation of intense beam transport has accurately reproduced measurements a
 \section{Introduction}
 
 
-The performance of high-intensity particle accelerators is limited by beam halo formation — the emergence of a low-density region of phase space far from the beam core. Halo suppression will become necessary in future accelerators with fractional beam loss requirements of $10^{-6}$ or below. Accurate measurement and prediction of beam halo is needed for this task.
+The performance of high-intensity particle accelerators is limited by beam halo formation \cite{}. Attempts to reproduce measured beam distributions at the halo level — a density at or below 10$^{-4}$ relative to the beam core — have been unsuccessful \cite{LEDA, Groening}. This is likely due to an inaccurate initial distribution of particles in 6D phase space. 
 
-Previous attempts to benchmark simulations with measurements at the halo level — a density at or below 10$^{-4}$ relative to the beam core — have been unsuccessful \cite{LEDA, Groening}. It is possible that (i) the physics encoded in the simulation model are inaccurate/incomplete, (ii) the lattice model is inaccurate/incomplete, (iii) the initial bunch particles are inaccurately distributed in phase space. 
+The Spallation Neutron Source (SNS) Beam Test Facility (BTF) is poised to resolve these discrepancies. The BTF is a replica of the front-end of the SNS linac — the H$^-$ ion source, low-energy beam transport (LEBT), radio-frequency quadrupole (RFQ), and medium energy beam transport (MEBT) — followed by a twenty-cell FODO transport line \cite{}. There are two emittance measurement stations: one after the RFQ and one after the FODO line. The two-dimensional (2D) horizontal and vertical phase space distributions can be measured at either station with a dynamic range above $10^6$ \cite{Alexandrov2020}, large enough to image the beam halo. The 6D phase space distribution can be measured at the first station. 
 
-The Spallation Neutron Source (SNS) Beam Test Facility (BTF) is poised to address (ii) and (iii). The BTF is a replica of the front-end of the SNS linac — the H$^-$ ion source, low-energy beam transport (LEBT), radio-frequency quadrupole (RFQ) and medium energy beam transport (MEBT) — followed by a 180-degree bend and a twenty-cell FODO transport line. There are two emittance measurement stations: one just after the RFQ and one after the FODO line. The two-dimensional (2D) horizontal/vertical phase space distribution can be measured at either station with a dynamic range above $10^6$. The 6D phase space distribution can be measured at the first station.
-
-Measurements of the 6D phase space distribution are currently limited in dynamic range ($10^1$) and resolution (10 points per dimension). Improvements to the scan efficiency are in development. In this paper, we discuss the use of three slits and one screen to measure a 5D projection of the 6D phase space distribution, overcoming these limitations at the cost of one dimension. 
+The goal of the BTF experimental program is to reproduce the measured halo at the second emittance station in simulation. To do so will require an accurate model of the accelerator and a realistic initial bunch. Unfortunately, it is not currently possible to generate a realistic initial bunch due to the limited dynamic range ($10^1$) and resolution (10 points per dimension) of the 6D measurement \cite{CatheyPRL}. Improvements to the scan efficiency are under development. In this paper, we discuss the use of three slits and one screen to measure a 5D projection of the 6D phase space distribution, overcoming these limitations at the cost of one dimension. 
 
 \section{Efficient 5D phase space measurement}
 
-The measurement apparatus shown in Fig.~\ref{fig:1} consists of two vertical slits to select the horizontal position $x$ and momentum $x'$, a vertical slit to select the vertical position $y$, and a scintillating screen after a dipole bend. The vertical momentum $y'$ is linearly related to the vertical position on the screen; the energy deviation $w$ is a function of the horizontal position on the screen as well as the $x$ and $x'$ selected by the upstream slits. The scan consists of a series of "sweeps" where the vertical slits are held fixed while the horizontal slit moves at a fixed speed, collecting the image on the screen on every beam pulse. A rectilinear scan pattern is employed with a linear correlation between $x$ and $x'$ to align the grid with the $x$-$x'$ distribution.
+The measurement apparatus consists of two vertical slits to select the horizontal position $x$ and momentum $x'$, a vertical slit to select the vertical position $y$, and a scintillating screen after a dipole bend (see \cite{Ruisard2022-NAPAC}). The vertical momentum $y'$ is linearly related to the vertical position on the screen; the energy deviation $w$ is a function of the horizontal position on the screen and the $x$ and $x'$ selected by the upstream slits. The scan consists of a series of "sweeps" where the vertical slits are held fixed while the horizontal slit moves at a fixed speed, collecting the image on the screen on every beam pulse. A rectilinear scan pattern is employed with a linear correlation between $x$ and $x'$ to align the grid with the $x$-$x'$ distribution. The data is linearly interpolated onto a regular grid after transforming to phase space variables.
 
-[The dynamic range of the measurements is estimated from the camera integral during the scan, shown in Fig.~\ref{fig:}.]
-
-Slit-scan phase space measurements produce a collection of points in space and a scalar value associated with each point. This data must be linearly interpolated on a regular grid. The scan pattern becomes highly relevant at this point: linear interpolation is infeasible in high-dimensional spaces for even a small number of points due to the poor scaling of Delaunay triangulation \cite{}. In our case, the data can be interpolated as follows. First, for each $x$, $x'$, and $y$, the horizontal image coordinate $x_3$ is converted to phase space coordinate $w(x_3, x, x', M)$, where $M$ is the linear transfer matrix from the first slit to the screen, and the image is interpolated along its horizontal axis onto a regular $w$ grid. Second, the vertical image coordinate $y_3$ is converted to phase space coordinate $y'(y, y_3, M)$ and the image is interpolated along its vertical axis onto a regular $y'$ grid. Third, for each $x$ and $x'$, the 3D $y$-$y'$-$w$ image is interpolated along the $y$ axis, which is irregularly spaced due to the acceleration of the slit at its turning points. Third, the $x$-$x'$ distribution is interpolated onto a regular $x$-$x'$ grid for each pixel in the 3D image. This final step can be broken into two 1D interpolations if the scan progresses along vertical or horizontal lines in $x$-$x'$ space, as is the standard practice in current BTF measurements.
-
+% \begin{figure}[!t]
+%     \centering
+%     \includegraphics[width=\columnwidth]{apparatus5D.png}
+%     \caption{5D phase space measurement apparatus.}
+%     \label{fig:5dmeas}
+% \end{figure}
 
 
 
 \section{Measurements of the initial distribution in the BTF}
 
-We begin by examining the measured 5D distribution at the first emittance station, just after the RFQ. The beam current during the measurement was stable at [] mA. [] points were collected over [] hours as the slits traversed a ? x ? x ? grid. The camera integral during the scan is shown in Fig.~\ref{fig:}. Fig.~\ref{fig:VS06_corner} shows the 2D projections of the measured 5D phase space distribution in a logarithmic color scale. The density profiles vary smoothly in all projections and there are apparently no correlations between the planes. 
+\subsection{Revisiting hidden features in the beam core}
+
+We first examine the measured 5D distribution at the first emittance station. The beam current during the measurement was stable at [] mA. [] points were collected over [] hours as the slits traversed a ? x ? x ? grid. Fig.~\ref{fig:VS06_corner} shows the 2D projections of the measured 5D phase space distribution. The density profiles vary smoothly in all projections and there are apparently no inter-plane correlations.
 %
 \begin{figure}[!b]
     \centering
@@ -115,10 +117,7 @@ We begin by examining the measured 5D distribution at the first emittance statio
 \end{figure}
 %
 
-Previous beam shape monitor (BSM) measurements of the beam exiting the RFQ have revealed nonlinear transverse-longitudinal correlations in the beam core: the energy distribution of particles at the center of transverse phase space ($x \approx x' \approx y \approx y' \approx 0$) is hollow and bimodal while the full projection is unimodal (see Fig.~\ref{fig:hollow_a}). This is a space-charge-driven effect \cite{Ruisard2021-hollow} and has a clear dependence on the beam intensity (see Appendix \ref{app:A}). 
-
-The relationship between the energy and transverse coordinates has been examined using partial projections of the  distribution \cite{CatheyPRL, Ruisard2021-hollow}; i.e., by inserting multiple slits upstream of the BSM. Such projections make clear the multi-dimensional nature of the correlation and are repeated for our 5D measurement in Fig.~\ref{fig:hollow}.
-
+Previous bunch shape monitor (BSM) measurements of the beam exiting the RFQ have revealed nonlinear transverse-longitudinal correlations in the beam core: the energy distribution of particles at the center of transverse phase space ($x \approx x' \approx y \approx y' \approx 0$) is hollow and bimodal while the full projection is unimodal \cite{CatheyPRL}. This is a space-charge-driven effect \cite{Ruisard2021-hollow} and has a clear dependence on the beam intensity (see Appendix \ref{app:A}). These studies examined the relationship between the energy and transverse coordinates by slicing the distribution in the transverse plane before projecting the distribution onto the energy axis; i.e., by inserting one or more slits upstream of the BSM. The five-dimensional nature of the correlation is made clear by observing the energy profile as each dimension is sliced. We repeat this for our 5D measurement in Fig.~\ref{fig:hollow_a}.
 %
 \begin{figure}[!t]
     \centering
@@ -137,17 +136,6 @@ The relationship between the energy and transverse coordinates has been examined
 \end{figure}
 %
 
-The 5D measurement provides a more complete picture: it reveals the extent of the hollow energy core in the transverse phase space. For example, Fig.~\ref{fig:contour_slices_a} plots the energy distribution within a shrinking volume in 4D phase space. For each threshold $t$, we integrate the 5D array along the $w$ axis and locate all elements whose value is less than $t$ times the maximum element in the 4D array. We then mask these indices in the 5D array before projecting it onto the $w$ axis. A hollow energy distribution begins to emerge at the $10^{-1}$ contour in 4D phase space.
-
-The effect of this feature on the long-term  beam dynamics is not yet known due to the lack of a realistic 6D simulation bunch. Some insight was gained in \cite{Ruisard2021-IPAC} by propagating a beam through the RFQ in simulation, then through the SNS linac before and after removing all inter-plane correlations from the distribution. (Although beams generated by RFQ simulations are significantly different than measurements in a root-mean-square sense, they exhibit hidden correlations in 6D phase space that are qualitatively similar to measurements.) Perhaps surprisingly, the two cases developed significant differences even in the root-mean-square beam sizes. 
-
-
-
-\section{5D simulation benchmark}
-
-While the 6D measurement can only be performed at the first emittance station, the 5D measurement can be performed at either emittance station. This provides a unique opportunity for a 5D simulation benchmark. In the next section, we will discuss the possibility of generating a 6D simulation bunch from the 5D measurement — for now, we generate initial bunches by independently sampling from 2D measurements such that $f(x,x',y,y',z,z') = f(x,x')f(y,y')f(z,z')$. 
-
-Fig.~\ref{fig:VS34} compares the measured 5D phase space distribution at the second emittance station to a simulation. The scan traversed a $64 \times 64 \times 64$ grid, collecting ? images in ? hours. The simulation was performed with a 3D fast Fourier transform space charge solver on a ?x?x? mesh with one million macro-particles.
 %
 \begin{figure*}[!t]
     \centering
@@ -165,7 +153,7 @@ Fig.~\ref{fig:VS34} compares the measured 5D phase space distribution at the sec
         \label{fig:VS34_b}
     \end{subfigure}
     \vfill
-    \vspace*{0.2cm}
+    % \vspace*{0.2cm}
     \vfill
     \begin{subfigure}{\textwidth}
         \includegraphics[width=\textwidth]{VS34_energy_slice.pdf}
@@ -173,37 +161,56 @@ Fig.~\ref{fig:VS34} compares the measured 5D phase space distribution at the sec
         \label{fig:VS34_c}
     \end{subfigure}
     \vfill
-    \vspace*{0.2cm}
+    % \vspace*{0.2cm}
     \vfill
     \begin{subfigure}{\textwidth}
         \includegraphics[width=\textwidth]{VS34_energy_slice_sim.png}
         \caption{}
         \label{fig:VS34_d}
     \end{subfigure}
-    \caption{Comparison between the measured and simulated 5D phase space distribution at the second emittance station. (a) Measured 1D/2D projections. (b) Simulated 1D/2D projections. (c) Measured $x$-$x'$ distribution for different energy slices. (d) Simulated $x$-$x'$ distribution for different energy slices. The initial bunch in the simulation was generated by independently sampling measured 2D phase spaces distributions at the first emittance station.}
+    \caption{Comparison between the measured and simulated 5D phase space distribution at the second emittance station. (a) Measured 1D/2D projections. (b) Simulated 1D/2D projections. (c) Measured $x$-$x'$ distribution for different energy slices. (d) Simulated $x$-$x'$ distribution for different energy slices. The initial bunch in the simulation was generated by independently sampling measured 2D phase space distributions at the first emittance station.}
     \label{fig:VS34}
 \end{figure*}
 %
 
-The reasonable agreement in $x$-$x'$-$w$ space — especially clear in the slice-emittances in Fig.~\ref{fig:VS34_c} and Fig.~\ref{fig:VS34_d} — was expected from previous successful benchmarks of the $x$-$x'$ distribution in \cite{Ruisard2021-IPAC}. The disagreement in the vertical plane is unresolved but may be due to vertical dispersion combined with unidentified quadrupole misalignment or offset of the beam centroid.
+Slicing the array in this way selects only a small faction of the beam particles — vanishingly small when three or four dimensions are sliced. Therefore, the previous measurements do not characterize the extent of the hollow energy core in the full transverse phase space. This information is encoded in the 5D measurement: Fig.~\ref{fig:hollow_b} plots the energy distribution within a shrinking volume of transverse phase space. For each threshold $t$, we integrate the 5D array along the $w$ axis and locate all elements whose value is less than $t$ times the maximum element in the 4D array. We then mask these indices in the 5D array before projecting the array onto the $w$ axis. A hollow energy distribution begins to emerge at the $10^{-1}$ contour.
+
+\subsection{Reconstructing the 6D distribution from 5D and 4D projections}
+
+The effect of hidden high-dimensional features on halo formation and long-term beam dynamics is not yet known due to the lack of a realistic 6D simulation bunch.\footnote{
+   Bunches produced by LEBT/RFQ simulations have qualitatively similar features to those seen in high-dimensional measurements, albeit large errors in the root-mean-square emittances. The simulated transport of these bunches through the SNS linac indicates that the correlations affect the root-mean-square beam sizes over time \cite{Ruisard2021-IPAC}.
+} The present resolution and dynamic range of direct 6D measurements are too low to capture these features. It is therefore prudent to determine whether the 6D distribution can be recovered from the high-resolution, relatively high-dynamic-range 5D measurements described herein. The problem can be formulated as follows, letting $z$ and $z'$ be the longitudinal phase space coordinates: construct $f(x, x', y, y', z, z')$ consistent with the measured $f(x, x', y, y', z')$ and $f(x, x', z, z')$, where the latter is measured using two vertical slits and a BSM \cite{Ruisard2021-long}. 
+
+We suggest several approaches here. A naive solution would be to set $f(x, x', y, y', z, z') = f(x, x', y, y', z') f(z)$; however, this assumes no correlation between $z$ and $z'$, which are strongly correlated in reality. A simple but promising approach is to generate a 5D particle distribution, then add the $z$-$z'$ correlation ``by hand", assuming $z \approx az' + \Delta$ where $a$ is a constant and $\Delta$ is a small random variable. This will be our first attempt.
+
+More interesting is the case of an arbitrary $z$ distribution. An almost identical problem has been encountered in astrophysics: the Gaia satellite has measured the phase space coordinates of many stars in the Milky Way galaxy, but a large fraction of the measurements contain only five of the six coordinates. Bayesian neural networks have been employed to infer the missing coordinate \cite{}. 
+
+Another approach is to treat the problem as a tomographic image reconstruction. For example, the Maximum Entropy (MENT) algorithm could be used, which selects the maximum entropy image among those consistent with the measured projections \cite{}. It is unknown if MENT (or other image reconstruction algorithms) can easily scale from two to six dimensions.
 
 
-\section{Reconstructing the 6D distribution from 5D and 4D projections} 
+\section{5D simulation benchmark}
 
-Perhaps the 6D distribution can be recovered from lower-dimensional projections. Doing so would allow realistic simulation bunches to be generated from high-resolution and relatively high-dynamic-range measurements, which is not currently possible with direct 6D measurements. Letting $z$ and $z'$ be the longitudinal phase space coordinates, the 5D projection $f(x, x', y, y', z')$ can be measured using the method described in this paper, while the 4D projection $f(x, x', z, z'$ can be measured using two vertical slits and a BSM \cite{Ruisard2021-long}. The problem is then to reconstruct $f(x, x', y, y', z, z')$ consistent with the measured $f(x, x', y, y', z')$ and $f(x, x', z, z')$. 
+While the 6D measurement can only be performed at the first emittance station, the 5D measurement can be performed at either emittance station. This provides a unique opportunity for a 5D simulation benchmark. Fig.~\ref{fig:VS34} compares the measured 5D phase space distribution at the second emittance station to a simulation. The scan traversed a $64 \times 64 \times 64$ grid, collecting ? images pver ? hours. The simulation was performed with a 3D fast Fourier transform space charge solver on a ?x?x? mesh with one million macro-particles. THe initial simulation bunch was generated by independently sampling 2D measurements such that $f(x,x',y,y',z,z') = f(x,x')f(y,y')f(z,z')$. The reasonable agreement in $x$-$x'$-$w$ space — especially clear in the slice-emittances in Fig.~\ref{fig:VS34_c} and Fig.~\ref{fig:VS34_d} — was expected from previous successful benchmarks of the $x$-$x'$ distribution in \cite{Ruisard2021-IPAC}. The disagreement in the vertical plane is unresolved; it may be due to unidentified quadrupole misalignment or an offset of the beam centroid.
 
-We propose several approaches here. A naive solution would be $f(x, x', y, y', z, z') = f(x, x', y, y', z') f(z)$; however, this assumes no correlation between $z$ and $z'$, which are strongly correlated in reality. A simple but promising solution is the first generate a 5D particle distribution, then add the $z$-$z'$ correlation ``by hand", assuming $z' a\approx z + \Delta$ where $a$ is a constant and $\Delta$ is a small random variable. This will be our first attempt.
-
-More interesting is the case of an arbitrary $z$ distribution. An almost identical problem has been encountered in astrophysics: the Gaia satellite has measured the phase space coordinates of many stars in the Milky Way galaxy, but a large fraction of the measurements contain only five of the six coordinates. Bayesian neural networks have been employed to predict the missing coordinate. 
-
-Another approach is to treat the problem as a tomographic image reconstruction. For example, the iterative Maximum Entropy (MENT) algorithm could be used, which selects the maximum entropy image among those consistent with the measured projections. It is unknown if MENT (or other image reconstruction algorithms) can easily scale from two to six dimensions.
 
 
 \section{Conclusion}
 
-Bla bla
+The Spallation Neutron Source (SNS) Beam Test Facility (BTF) has the ability to measure the full 6D phase space distribution of an intense ion beam. Such a measurement could lead to the accurate prediction of beam halo formation; however, the resolution and dynamic range of 6D measurements are currently two low to generate a realistic simulation bunch. 5D phase space measurements offer significant improvements in dynamic range and resolution. The 5D phase space distribution was measured at the first emittance station in the BTF. Hidden high-dimensional features in the beam core — previously measured only in small slices of the transverse phase space — were revisited. Several strategies to reconstruct the 6D distribution from the 5D measurement were suggested. Finally, the measured 5D phase space distribution at the end of the BTF beamline was used to benchmark a computer simulation. Reasonable agreement was found in the 3D $x$-$x'$-$w$ space. Significant disagreement remain in $y$-$y'$ space.
 
-\section{Appendix}\label{app:A}
+\section{ACKNOWLEDGEMENTS}
+This material is based upon work supported by the U.S. Department of Energy, Office of Science, Office of High Energy Physics.
+This manuscript has been authored by UT- Battelle, LLC under Contract No. DE-AC05-00OR22725 with the U.S. Department of Energy. This research used resources at the Spallation Neutron Source, a DOE Office of Science User Facility operated by the Oak Ridge National Laboratory.
+
+
+% \section{Appendix}\label{app:A}
+
+% \begin{figure}[!b]
+%     \centering
+%     \includegraphics[width=0.8\columnwidth]{hollow_current.pdf}
+%     \caption{Energy distribution of partial projections ($x \approx x' \approx y \approx 0$) of the beam as a function of the beam current. This reproduces Fig.~? from \cite{CatheyPRL} with a finer intensity scale.}
+%     \label{fig:hollow_current}
+% \end{figure}
 
 
 \printbibliography

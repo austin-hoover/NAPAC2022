@@ -82,7 +82,7 @@ No simulation of intense beam transport has accurately reproduced measurements a
 
 \section{Introduction}
 
-The phase space distributions of intense beams tend to develop halo during low-energy transport \cite{Batygin2021}. The existence of beam halo at higher energies leads to uncontrolled losses that limit the performance of high-power accelerators \cite{Henderson2014}. Attempts to reproduce measurements at the halo level in computer simulation have been unsuccessful \cite{Allen2002, Qiang2002, Groening2008}, likely due to an inaccurate initial distribution of particles in 6D phase space.
+The phase space distributions of intense beams tend to develop halo during low-energy transport \cite{Batygin2021}. The existence of beam halo at higher energies leads to uncontrolled losses that limit the performance of high-power accelerators \cite{Henderson2014}. Attempts to reproduce measurements at the halo level in computer simulation have been unsuccessful \cite{Allen2002, Qiang2002, Groening2008}, likely due to an inaccurate initial distribution of particles in 6D~phase space.
 
 The Spallation Neutron Source (SNS) Beam Test Facility (BTF) is poised to resolve these discrepancies. The BTF is a replica of the front-end of the SNS — the H$^-$ ion source, 65\,keV low-energy beam transport (LEBT), 402.5 MHz radio-frequency quadrupole (RFQ), and 2.5 MeV medium energy beam transport (MEBT) — followed by a 9.5-cell FODO transport line \cite{Zhang2020}. There are two emittance measurement stations: one 1.3 meters downstream of the RFQ and one after the FODO line. The two-dimensional (2D) horizontal and vertical phase space distributions can be measured at either station with a dynamic range above $10^6$ \cite{Aleksandrov2021}, large enough to image the beam halo \cite{Aleksandrov2020}. The 6D phase space distribution can be measured at the first station \cite{Cathey2018}. 
 
@@ -96,7 +96,7 @@ The measurement apparatus is described in \cite{Ruisard2022-NAPAC}; it consists 
 
 \subsection{Revisiting Hidden Features in the Beam Core}
 
-We first examine a measured 5D distribution at the first emittance station. 57,766 images were collected over 4.9 hours as the slits traversed a $32 \times 32 \times 32$ grid. The beam current during the measurement was stable at 30.6 mA. The full projections of this data set are shown in \cite{Ruisard2022-NAPAC}; the density profiles vary smoothly in all projections and there are no visible inter-plane correlations.
+We first examine a measured 5D distribution at the first emittance station. 57,766 images were collected over 4.9~hours as the slits traversed a $32 \times 32 \times 32$ grid. The beam current during the measurement was stable at 30.6 mA. The full projections of this data set are shown in \cite{Ruisard2022-NAPAC}; the density profiles vary smoothly in all projections and there are no visible inter-plane correlations.
 
 Yet previous high-dimensional measurements of the beam exiting the RFQ have revealed nonlinear transverse-longitudinal correlations in the beam core: the energy and phase distribution of particles at the center of transverse phase space ($x \approx x' \approx y \approx y' \approx 0$) is hollow and bimodal while the full projection is unimodal \cite{Cathey2018}. This is a space-charge-driven effect \cite{Ruisard2021-hollow} and has a clear dependence on the beam intensity. The relationship between the energy and transverse coordinates has been examined by slicing the distribution in the transverse plane before projecting the distribution onto the energy axis; i.e., by inserting slits upstream of the longitudinal emittance measurement diagnostic. The five-dimensional nature of the correlation is made clear by observing the energy profile as each dimension is sliced. We repeat this for our 5D measurement in Fig.~\ref{fig:hollow}(a).
 %
@@ -149,7 +149,7 @@ Yet previous high-dimensional measurements of the beam exiting the RFQ have reve
         \caption{}
         \label{fig:VS34_d}
     \end{subfigure}
-    \caption{5D measurement-simulation comparison after transport through the BTF. The measured (a) and simulated (b) projections are shown in linear color scale. The measured (c) and simulated (d) $x$-$x'$ projections within $\approx$ 2 keV energy slices are shown in logarithmic color scale. (Note that the color scales are not normalized across subplots.)}
+    \caption{5D measurement-simulation comparison after transport through the BTF. The measured (a) and simulated (b) projections are shown in linear color scale. The measured (c) and simulated (d)~$x$-$x'$ projections within $\approx$ 2 keV energy slices are shown in logarithmic color scale. (Note that the color scales are not normalized across subplots.)}
     \label{fig:VS34}
 \end{figure*}
 %
@@ -167,16 +167,16 @@ We suggest several approaches here. A simple but promising approach is to genera
 
 \section{5D simulation benchmark}
 
-While the 6D measurement can only be performed at the first emittance station, the 5D measurement can be performed at either emittance station. This provides a unique opportunity for a 5D simulation benchmark. We performed a scan at the second emittance station, collecting 220,783 images over 13.8 hours. The beam current was stable during the scan at 25.8 mA. This produced an interpolated phase space density array with dimensions 71 $\times$ 104 $\times$ 71 $\times$ 110 $\times$ 92.\footnote{
+While the 6D measurement can only be performed at the first emittance station, the 5D measurement can be performed at either emittance station. This provides a unique opportunity for a 5D simulation benchmark. We performed a scan at the second emittance station, collecting 220,783~images over 13.8 hours. The beam current was stable during the scan at 25.8 mA. This produced an interpolated phase space density array with dimensions 71 $\times$ 104 $\times$ 71 $\times$ 110 $\times$ 92.\footnote{
     The measurement grid is sheared along the $x'$ axis, boosting the resolution along the second axis of the array. All images were downscaled by a factor of three using local averaging.
 } 
 
 
-Fig.~\ref{fig:VS34}(a) and Fig.~\ref{fig:VS34}(b) compare the 1D and 2D projections of the measured 5D distribution with a particle-in-cell simulation. The simulation was performed in the PyORBIT code with a 3D fast Fourier transform space charge solver on a 64 $\times$ 64 $\times$ 64 mesh with 10,000,000 macro-particles. The initial simulation bunch was generated by independently sampling 2D measurements such that $f(x,x',y,y',z,z') = f(x,x')f(y,y')f(z,z')$.\footnote{
+Figures \ref{fig:VS34}(a) and \ref{fig:VS34}(b) compare the 1D and 2D projections of the measured 5D distribution with a particle-in-cell simulation. The simulation was performed in the PyORBIT code with a 3D fast Fourier transform space charge solver on a 64 $\times$ 64 $\times$ 64 mesh with 10,000,000 macro-particles. The initial simulation bunch was generated by independently sampling 2D measurements such that $f(x,x',y,y',z,z') = f(x,x')f(y,y')f(z,z')$.\footnote{
     The 2D measurements were taken at a beam current of 29 mA, slightly higher than in the 5D measurement. We used a 29 mA beam current in this simulation.
 } The reasonable agreement in $x$-$x'$ was expected from previous work \cite{Ruisard2021-IPAC}. The discrepancy in $y$-$y'$ was also expected; it may be due to unidentified quadrupole misalignments or an offset of the beam centroid. 
 
-Strong correlations in $x$-$x'$-$w$ subspace are evident in the 2D projections. Fig.~\ref{fig:VS34}(c) and Fig.~\ref{fig:VS34}(d) examine this subspace in more detail, displaying the $x$-$x'$ distribution within $\approx$ 2 keV energy slices. Although the simulation-measurement agreement is not perfect, the elongation and rotation of the $x$-$x'$ projection as a function of energy is reproduced. A detailed investigation of the measured 5D phase space distribution is reserved for a future publication.
+Strong correlations in $x$-$x'$-$w$ subspace are evident in the 2D projections. Figures \ref{fig:VS34}(c) and \ref{fig:VS34}(d) examine this subspace in more detail, displaying the $x$-$x'$ distribution within $\approx$ 2\,keV energy slices. Although the simulation-measurement agreement is not perfect, the elongation and rotation of the $x$-$x'$ projection as a function of energy is reproduced. A detailed investigation of the measured 5D phase space distribution is reserved for a future publication.
 
 
 \section{Conclusion}
